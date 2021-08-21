@@ -57,6 +57,30 @@ exports.signup = (req, res) => {
 
 // --------sign-in----------//
 exports.signIn = (req, res) => {
-  res.send("heelo");
-  //todo
+  const { email, password } = req.body;
+  //------------email check -----------//
+  const isValid = temporarydata.findIndex((el) => el.email === email);
+
+  if (isValid === -1) {
+    res.status(500).json({
+      error: "user does-not exist",
+    });
+  }
+  //----------password hash ----------//
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      res.status(500).json("thier is some error");
+    }
+    const validity = temporarydata.findIndex((el) => el.password === password);
+    console.log(hash);
+    if (validity === -1) {
+      res.status(500).json({
+        error: "password is wrong",
+      });
+    } else {
+      res.status(200).json({
+        messaage: "welcome user",
+      });
+    }
+  });
 };
