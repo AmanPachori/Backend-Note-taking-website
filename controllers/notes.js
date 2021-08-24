@@ -23,8 +23,17 @@ exports.getNotes = (req, res) => {
   client
     .query(`SELECT * FROM notes where email='${req.email}';`)
     .then((data) => {
+      const noteData = data.rows;
+      const filteredData = noteData.map((note) => {
+        return {
+          noteId: note.noteid,
+          heading: note.heading,
+          content: note.content,
+        };
+      });
       res.status(200).json({
         message: "all ok",
+        data: filteredData,
       });
     })
     .catch((err) => {
