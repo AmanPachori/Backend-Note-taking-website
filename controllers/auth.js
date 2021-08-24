@@ -22,7 +22,6 @@ const client = require("../configure/db");
 
 exports.signup = (req, res) => {
   const { name, email, password } = req.body;
-  console.log(req.body);
 
   //------------- NOTE : checking for User -----------//
   // const check = temporarydata.findIndex((el) => el.email === email);
@@ -77,7 +76,7 @@ exports.signup = (req, res) => {
 //--------sign-in----------//
 exports.signIn = (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+
   //------------- NOTE : checking for User -----------//
   // const check = temporarydata.findIndex((el) => el.email === email);
   client
